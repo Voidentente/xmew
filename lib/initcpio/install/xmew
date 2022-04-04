@@ -7,9 +7,9 @@ build() {
 
 help() {
     cat <<HELPEOF
-Use this hook in combination with plain dm-crypt to decrypt your keyfile in initramfs
-before it is used by the _encrypt_ hook.
-Uses OpenSSL AES-256 via password.
+Use this simple hook in combination with plain dm-crypt to decrypt your keyfile in initramfs
+before it is used by the encrypt hook. Decrypts with OpenSSL AES-256-CBC and PBKDF2.
+Please note: You should only use this in combination with the keyboard and keymap hooks.
 HELPEOF
 }
 

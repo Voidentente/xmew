@@ -8,17 +8,18 @@ run_hook() {
 
     if [ -r ${infile} ]; then
         while true; do
-            read -rsp "Password: " password
+            read -rsp "xmew: Password: " password
             openssl aes-256-cbc -pbkdf2 -pass pass:"${password}" -d -in "${infile}" -out "${outfile}" >/dev/null 2>&1
             retcode="$?"
             if [ "${retcode}" != 0 ]; then
-                echo "Bad password"
+                echo "xmew: Bad password"
             else
+                echo "xmew: Success!"
                 break
             fi
         done
     else
-        echo "ERROR: ${infile} does not exist or is not readable"
+        echo "xmew: ${infile} does not exist or is not readable"
     fi
 }
 
