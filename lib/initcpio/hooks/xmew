@@ -1,0 +1,16 @@
+#!/bin/bash
+
+build() {
+    add_binary "/bin/openssl"
+    add_runscript
+}
+
+help() {
+    cat <<HELPEOF
+Use this hook in combination with plain dm-crypt to decrypt your keyfile in initramfs
+before it is used by the _encrypt_ hook.
+Uses OpenSSL AES-256 via password.
+HELPEOF
+}
+
+# vim: set ft=sh ts=4 sw=4 et:
