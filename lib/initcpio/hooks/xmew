@@ -12,9 +12,9 @@ run_hook() {
             openssl aes-256-cbc -pbkdf2 -pass pass:"${password}" -d -in "${infile}" -out "${outfile}" >/dev/null 2>&1
             retcode="$?"
             if [ "${retcode}" != 0 ]; then
-                echo "xmew: Bad password"
+                echo "Bad password"
             else
-                echo "xmew: Success!"
+                echo "Success"
                 break
             fi
         done
