@@ -1,29 +1,16 @@
 #!/bin/bash
 
-run_hook() {
-    local infile outfile password retcode
+build() {
+    add_binary "/bin/openssl"
+    add_runscript
+}
 
-    if [ "x${xmew}" != "x" ]; then
-        infile="/root/root.enc"
-        outfile="/root/root.key"
-
-        if [ -r ${infile} ]; then
-            while true; do
-                read -rsp "Password: " password
-                openssl aes-256-cbc -pbkdf2 -pass pass:"${password}" -d -in "${infile}" -out "${outfile}" >/dev/null 2>&1
-                retcode="$?"
-                if [ "${retcode}" != 0 ]; then
-                    echo "Bad password"
-                else
-                    break
-                fi
-            done
-        else
-            echo "ERROR: ${infile} does not exist or is not readable"
-        fi
-    else
-        echo "ERROR: {xmew} not fulfilled"
-    fi
+help() {
+    cat <<HELPEOF
+Use this hook in combination with plain dm-crypt to decrypt your keyfile in initramfs
+before it is used by the _encrypt_ hook.
+Uses OpenSSL AES-256 via password.
+HELPEOF
 }
 
 # vim: set ft=sh ts=4 sw=4 et:
